@@ -1,0 +1,7 @@
+.idea/
+.ruby-lsp/
+.vscode/
+
+coverage/
+
+.env
