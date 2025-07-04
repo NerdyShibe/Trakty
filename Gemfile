@@ -11,9 +11,8 @@ gem 'oauth2'
 
 group :development, :test do
   gem 'debug'
-  gem 'minitest'
-  gem 'minitest-reporters'
+  gem 'rspec'
   gem 'rubocop'
-  gem 'rubocop-minitest'
   gem 'simplecov'
+  gem 'webmock'
 end

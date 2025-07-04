@@ -1,15 +1,19 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    ansi (1.5.0)
+    addressable (2.8.7)
+      public_suffix (>= 2.0.2, < 7.0)
     ast (2.4.3)
     base64 (0.3.0)
     bigdecimal (3.2.2)
-    builder (3.3.0)
+    crack (1.0.0)
+      bigdecimal
+      rexml
     date (3.4.1)
     debug (1.11.0)
       irb (~> 1.10)
       reline (>= 0.3.8)
+    diff-lcs (1.6.2)
     docile (1.4.1)
     dotenv (3.1.8)
     erb (5.0.1)
@@ -19,6 +23,7 @@ GEM
       logger
     faraday-net_http (3.4.1)
       net-http (>= 0.5.0)
+    hashdiff (1.2.0)
     hashie (5.0.0)
     io-console (0.8.0)
     irb (1.15.2)
@@ -31,12 +36,6 @@ GEM
     language_server-protocol (3.17.0.5)
     lint_roller (1.1.0)
     logger (1.7.0)
-    minitest (5.25.5)
-    minitest-reporters (1.7.1)
-      ansi
-      builder
-      minitest (>= 5.0)
-      ruby-progressbar
     multi_xml (0.7.2)
       bigdecimal (~> 3.1)
     net-http (0.6.0)
@@ -60,6 +59,7 @@ GEM
     psych (5.2.6)
       date
       stringio
+    public_suffix (6.0.2)
     racc (1.8.1)
     rack (3.1.16)
     rainbow (3.1.1)
@@ -69,6 +69,20 @@ GEM
     regexp_parser (2.10.0)
     reline (0.6.1)
       io-console (~> 0.5)
+    rexml (3.4.1)
+    rspec (3.13.1)
+      rspec-core (~> 3.13.0)
+      rspec-expectations (~> 3.13.0)
+      rspec-mocks (~> 3.13.0)
+    rspec-core (3.13.5)
+      rspec-support (~> 3.13.0)
+    rspec-expectations (3.13.5)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.13.0)
+    rspec-mocks (3.13.5)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.13.0)
+    rspec-support (3.13.4)
     rubocop (1.77.0)
       json (~> 2.3)
       language_server-protocol (~> 3.17.0.2)
@@ -83,10 +97,6 @@ GEM
     rubocop-ast (1.45.1)
       parser (>= 3.3.7.2)
       prism (~> 1.4)
-    rubocop-minitest (0.38.1)
-      lint_roller (~> 1.1)
-      rubocop (>= 1.75.0, < 2.0)
-      rubocop-ast (>= 1.38.0, < 2.0)
     ruby-progressbar (1.13.0)
     simplecov (0.22.0)
       docile (~> 1.1)
@@ -103,6 +113,10 @@ GEM
     unicode-emoji (4.0.4)
     uri (1.0.3)
     version_gem (1.1.8)
+    webmock (3.25.1)
+      addressable (>= 2.8.0)
+      crack (>= 0.3.2)
+      hashdiff (>= 0.4.0, < 2.0.0)
 
 PLATFORMS
   ruby
@@ -112,12 +126,11 @@ DEPENDENCIES
   debug
   dotenv
   faraday
-  minitest
-  minitest-reporters
   oauth2
+  rspec
   rubocop
-  rubocop-minitest
   simplecov
+  webmock
 
 RUBY VERSION
    ruby 3.4.4p34
