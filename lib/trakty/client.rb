@@ -17,10 +17,30 @@ module Trakty
     end
 
     #
-    # @param id [String] => Trakt username 'my_username'
-    def users(id)
-      Trakty::Resources::Users.new(self, id)
+    # @param user_id [String] => Trakt username/slug
+    def users(user_id)
+      Trakty::Resources::Users.new(self, user_id)
     end
+
+    #
+    # HTTP methods to be executed by Faraday's Connection
+    def get(path, params = {})
+      connection.get(path, params)
+    end
+
+    def post(path, body, params = {})
+      connection.post(path, body, params)
+    end
+
+    def put(path, body, params = {})
+      connection.put(path, body, params)
+    end
+
+    def delete(path, params = {})
+      connection.delete(path, params)
+    end
+
+    private
 
     def connection
       @connection = Faraday.new(url: BASE_URL, ssl: { verify: false }) do |conn|
