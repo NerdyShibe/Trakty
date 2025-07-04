@@ -3,7 +3,7 @@
 module Trakty
   ##
   # Implements the OAuth2 authentication
-  class Auth
+  class Authenticator
     def initialize(client)
       @client = client
 
