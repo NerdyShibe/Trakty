@@ -11,7 +11,7 @@ module Trakty
       #
       # Supports: Pagination + Extended Info + Filters
       def trending
-        Trakty::RequestHandler.new(self, %w[movies trending])
+        Trakty::Services::RequestBuilder.new(self, %w[movies trending])
       end
 
       #
@@ -20,7 +20,7 @@ module Trakty
       #
       # Supports: Pagination + Extended Info + Filters
       def popular
-        Trakty::RequestHandler.new(self, %w[movies popular])
+        Trakty::Services::RequestBuilder.new(self, %w[movies popular])
       end
 
       #
@@ -28,7 +28,7 @@ module Trakty
       #
       # Supports: Pagination + Extended Info + Filters
       def favorited
-        Trakty::RequestHandler.new(self, %w[movies favorited])
+        Trakty::Services::RequestBuilder.new(self, %w[movies favorited])
       end
 
       #

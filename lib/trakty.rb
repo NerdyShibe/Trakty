@@ -20,7 +20,5 @@ require_relative 'trakty/services/request_builder'
 #
 # Trakt Rest API Client
 module Trakty
-  client = Trakty::Client.new
-
-  client.users('mr_shibe69').watching
+  Trakty::Client.new
 end

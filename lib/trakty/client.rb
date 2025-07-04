@@ -16,11 +16,19 @@ module Trakty
       Trakty::Resources::Movies.new(self)
     end
 
+    #
+    # @param id [String] => Trakt username 'my_username'
+    def users(id)
+      Trakty::Resources::Users.new(self, id)
+    end
+
     def connection
       @connection = Faraday.new(url: BASE_URL, ssl: { verify: false }) do |conn|
         conn.request  :json
-        conn.response :json
-        conn.response :logger
+        conn.response :json # Faraday's Middleware for parsing the response
+        # conn.response :logger
+        # conn.response :raise_error # Faraday's Middleware for handling errors
+        conn.use      Trakty::Services::ErrorHandler
         conn.adapter  :net_http
 
         conn.headers['Content-Type']      = 'application/json'

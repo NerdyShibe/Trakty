@@ -6,15 +6,13 @@ module Trakty
     # All other resources should inherit from this
     # Will handle the logic for the REST HTTP methods
     class Base
-      def initialize(client)
+      def initialize(client, id = nil)
         @client = client
+        @id = id
       end
 
-      # TODO: Handle errors
       def get(path, params = nil)
-        response = @client.connection.get(path, params)
-
-        puts JSON.pretty_generate(response.body)
+        @client.connection.get(path, params)
       end
 
       # TODO: Implement the other HTTP methods
