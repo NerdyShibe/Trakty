@@ -24,9 +24,9 @@ module Trakty
       attr_reader :path, :params
 
       #
+      # @param resource => inherits from Trakt::Resources::Base
       # @param path [Array] => ['movies', 'trending']
       # @param params [Hash] => { 'year' => 2016, 'page' => 2 }
-      #
       def initialize(resource, path = [], params = {})
         @resource = resource
         @path = path

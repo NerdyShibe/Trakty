@@ -23,7 +23,7 @@ module Trakty
 
       payload = { 'client_id' => ENV['TRAKT_CLIENT_ID'] }
 
-      response = @client.connection.post('oauth/device/code', payload) do |conn|
+      response = @client.post('oauth/device/code', payload) do |conn|
         conn.headers['Content-Type'] = 'application/json'
       end
 
@@ -38,20 +38,14 @@ module Trakty
 
       if response.status == 200
         puts 'Successfully fetched the user+device code'
-        @device_code = response.body['device_code']
-        @user_code = response.body['user_code']
-        @verification_url = response.body['verification_url']
-        @expires_in = response.body['expires_in']
-        @interval = response.body['interval']
+        save_response(response)
 
         puts "Code succesfully generated: #{@user_code}"
         puts "Please go to #{@verification_url} to activate the app"
       else
-        puts 'Error generating codes'
+        puts 'Something went wrong generating codes'
+        puts "Response status: #{response.status}"
       end
-
-      puts "Response code: #{response.status}"
-      puts "Response body: #{response.body}"
     end
 
     def poll_authorization
@@ -62,7 +56,7 @@ module Trakty
       while Time.now < time_limit
         puts 'Querying to check if the user is authorized'
         puts "Will be checking every #{@interval} seconds"
-        response = @client.connection.post('oauth/device/code', payload) do |conn|
+        response = @client.post('oauth/device/token', payload) do |conn|
           conn.headers['Content-Type'] = 'application/json'
         end
 
@@ -73,6 +67,14 @@ module Trakty
 
         sleep(@interval)
       end
+    end
+
+    def save_response(response)
+      @device_code = response.body['device_code']
+      @user_code = response.body['user_code']
+      @verification_url = response.body['verification_url']
+      @expires_in = response.body['expires_in']
+      @interval = response.body['interval']
     end
   end
 end
