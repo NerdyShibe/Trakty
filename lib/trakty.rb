@@ -20,5 +20,7 @@ require_relative 'trakty/services/request_builder'
 #
 # Trakt Rest API Client
 module Trakty
+  VERSION = '0.0.1'
+
   Trakty::Client.new
 end
