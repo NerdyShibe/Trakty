@@ -11,7 +11,9 @@ module Trakty
       #
       # Supports: Pagination + Extended Info + Filters
       def trending
-        Trakty::Services::RequestBuilder.new(self, %w[movies trending])
+        options = { pagination: true, extended: true, filters: true }
+
+        Trakty::Services::RequestBuilder.new(self, %w[movies trending], options)
       end
 
       #
@@ -27,7 +29,8 @@ module Trakty
       # Returns the most favorited movies in the specified time period
       #
       # Supports: Pagination + Extended Info + Filters
-      def favorited
+      def favorited(period)
+        path = "movies/favorited/#{period}"
         Trakty::Services::RequestBuilder.new(self, %w[movies favorited])
       end
 

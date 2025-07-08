@@ -8,9 +8,8 @@ module Trakty
       #
       # @param client [Trakty::Client] => Main client instance
       # @param type [String] => Either 'movies' or 'shows'
-      def initialize(client, type)
+      def initialize(client)
         super(client)
-        @type = type
 
         list
       end
@@ -18,7 +17,7 @@ module Trakty
       #
       # Returns a list of all genres, including names and slugs
       def list
-        get("genres/#{@type}")
+        Services::RequestBuilder.new(self, %w[genres])
       end
     end
   end

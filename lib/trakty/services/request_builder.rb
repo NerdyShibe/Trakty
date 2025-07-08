@@ -27,10 +27,12 @@ module Trakty
       # @param resource => inherits from Trakt::Resources::Base
       # @param path [Array] => ['movies', 'trending']
       # @param params [Hash] => { 'year' => 2016, 'page' => 2 }
-      def initialize(resource, path = [], params = {})
+      # @param options [Hash] => { pagination: true, extended: true, filters: true}
+      def initialize(resource, path = [], params = {}, options = {})
         @resource = resource
         @path = path
         @params = params
+        @options = options
       end
 
       #
@@ -52,8 +54,18 @@ module Trakty
       #
       # --- Filters ---
 
-      def by_year(year)
-        @params[:year] = year
+      def extended_info(level)
+        @params[:extended] = level
+        self
+      end
+
+      def query(string)
+        @params[:query] = string
+        self
+      end
+
+      def by_years(years)
+        @params[:years] = years
         self
       end
 
@@ -62,8 +74,23 @@ module Trakty
         self
       end
 
+      def by_languages(*languages)
+        @params[:languages] = languages.join(',')
+        self
+      end
+
+      def by_countries(*countries)
+        @params[:countries] = countries.join(',')
+        self
+      end
+
       #
       # Path alters
+
+      def by_type(type)
+        @path << type
+        self
+      end
 
       def by_period(period = 'weekly')
         @path << period

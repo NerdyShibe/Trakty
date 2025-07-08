@@ -14,6 +14,14 @@ module Trakty
         @client = client
       end
 
+      def features
+        {
+          pagination: false,
+          extended_info: false,
+          filters: false
+        }
+      end
+
       #
       # DRY way of accessing the HTTP methods from the client
       def_delegators :@client, :get, :post, :put, :delete
